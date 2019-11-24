@@ -21,6 +21,8 @@ PATH_SRC = ./
 SRCS = $(PATH_SRC)filler.c \
 	  $(PATH_SRC)main.c \
 	  $(PATH_SRC)tabopti.c \
+	  $(PATH_SRC)check_piece.c \
+	  $(PATH_SRC)int_map.c \
 
 OBJS = $(SRCS:.c=.o)
 
