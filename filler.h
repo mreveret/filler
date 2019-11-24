@@ -24,12 +24,12 @@ typedef struct	s_struct
 	int			p;
 	char			m;
 	char			**tab1;
-	int			l;
-	int			c;
-	int			heigth_p;
-	int			width_p;
-	int			height_f;
-	int			width_f;
+	int			h;
+	int			p;
+	int			h_p;
+	int			w_p;
+	int			h_f;
+	int			w_f;
 	int			x;
 	int			y;
 	char			**tab2;
