@@ -13,7 +13,7 @@
 
 static void		check2(t_struct *f, int **tab)
 {
-	while (f->j < f->cp)
+	while (f->j < f->w_p)
 	{
 		if (f->tab2[f->i][f->j] == '*')
 		{
@@ -37,7 +37,7 @@ static void		check2(t_struct *f, int **tab)
 
 static void		check1(t_struct *f, int **tab)
 {
-	while (f->i < f->lp)
+	while (f->i < f->h_p)
 	{
 		f->j = 0;
 		f->y2 = f->y1;
@@ -60,8 +60,8 @@ static void		init(t_struct *f)
 	f->tmp = 0;
 	f->tmp2 = 0;
 	f->a = 0;
-	f->lf = 0;
-	f->cf = 0;
+	f->h_f = 0;
+	f->w_f = 0;
 }
 
 int			check_pieces(t_struct *f, int **tab)
@@ -75,13 +75,13 @@ int			check_pieces(t_struct *f, int **tab)
 			f->i = 0;
 			f->x2 = f->x1;
 			check1(f, tab);
-			if (f->i == f->lp && f->j == f->cp && f->tmp > 1000
+			if (f->i == f->h_p && f->j == f->w_p && f->tmp > 1000
 					&& f->tmp < 2000 && (f->a == 0 || (f->p == 1
 					&& f->a > f->tmp) || (f->p == 2 && f->a >= f->tmp)))
 			{
 				f->a = f->tmp;
-				f->lf = f->x1;
-				f->cf = f->y1;
+				f->h_f = f->x1;
+				f->w_f = f->y1;
 			}
 			f->tmp = 0;
 			f->y1++;
