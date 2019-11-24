@@ -12,74 +12,91 @@
 
 #include "filler.h"
 
-int     main(int ac, char **av)
+static int      reading3(t_struct *f, char *l, int i, int j)
 {
-    (void)ac;
-    (void)av;
-    int     i;
-    int     j;
-    t_env f;
-    char    *line;
-    i = -1;
-    j = -1;
-    f.p = 0;
+    if (i == 1)
+    {
+        while (!ft_isdigit(*l))
+            l++;
+        f->h_p = ft_atoi(l);
+        while (ft_isdigit(*l))
+            l++;
+        f->w_p = ft_atoi(l);
+        if (!(f->tab2 = (char **)malloc(sizeof(char *) * f->h_p)))
+            return (-3);
+    }
+    if (i == 2)
+    {
+        if (!(f->tab2[j] = (char *)malloc(sizeof(char) * (ft_strlen(l) + 1))))
+            return (-4);
+        f->tab2[j] = ft_strncpy(f->tab2[j], l, f->w_p);
+    }
+    return (1);
+}
+static int      reading2(t_struct *f, char *l, int i, int j)
+{
+    if (j == 1)
+    {
+        while (!ft_isdigit(*l))
+            l++;
+        f->h = ft_atoi(l);
+        while (ft_isdigit(*l))
+            l++;
+        f->w = ft_atoi(l);
+        if (!(f->tab1 = (char **)malloc(sizeof(char *) * f->h + 1)))
+            return (-1);
+    }
+    if (j == 2)
+    {
+        if (!(f->tab1[i] = (char *)malloc(sizeof(char) * (ft_strlen(l) + 1))))
+            return (-2);
+        f->tab1[i] = ft_strncpy(f->tab1[i], l, f->w + 4);
+    }
+    return (1);
+}
+static void     test(t_struct *f, char *line)
+{
+    if (ft_strlen(line) > 8 && ft_strstr(line, "Plateau ")
+            && reading2(f, line, f->i1, 1))
+        return ;
+    if (f->h > 0 && ++f->i1 < f->h + 1 && reading2(f, line, f->i1, 2))
+        return ;
+    if (ft_strlen(line) > 6 && ft_strstr(line, "Piece ")
+            && reading3(f, line, 1, f->j1))
+        return ;
+    if (f->h_p > 0 && ++f->j1 < f->h_p && reading3(f, line, 2, f->j1))
+    {
+        if (f->j1 == f->h_p - 1 && filler(f) && (f->i1 = -1))
+            f->j1 = -1;
+        return ;
+    }
+}
+static void     reading(t_struct *f)
+{
+    char        *line;
+    f->i1 = -1;
+    f->j1 = -1;
+    if (get_next_line(0, &line) > 0 && ft_strlen(line) > 10
+            && ft_strstr(line, "$$$ exec p"))
+    {
+        if (ft_strstr(line, "mreveret") && (f->p = ft_atoi(line + 10)))
+            f->m = f->p == 1 ? 'O' : 'X';
+        free(line);
+    }
     while (get_next_line(0, &line) > 0)
     {
-        if (ft_strlen(line) > 10 && ft_strstr(line, "$$$ exec p"))
-        {
-            if (ft_strstr(line, "machoffa"))
-            {
-                f.p = ft_atoi(line + 10);
-                f.c = f.p == 1 ? 'O' : 'X';
-            }
-            continue ;
-        }
-        if (ft_strlen(line) > 8 && ft_strstr(line, "Plateau "))
-        {
-            while (!ft_isdigit(*line))
-                line++;
-            f.h = ft_atoi(line);
-            while (ft_isdigit(*line))
-                line++;
-            f.w = ft_atoi(line);
-            if (!(f.tab1 = (char **)malloc(sizeof(char *) * f.h + 1)))
-                return (-1);
-            continue ;
-        }
-        if (++i < f.h + 1)
-        {
-            if (!(f.tab1[i] = (char *)malloc(sizeof(char) * ft_strlen(line))))
-                return (-2);
-            f.tab1[i] = ft_strncpy(f.tab1[i], line, f.w + 4);
-            continue ;
-        }
-//      if (i == f.h + 1)
-//      {
-//          f.tab1[i] = 0;
-//          continue ;
-//      }
-        if (ft_strlen(line) > 6 && ft_strstr(line, "Piece "))
-        {
-            while (!ft_isdigit(*line))
-                line++;
-            f.hp = ft_atoi(line);
-            while (ft_isdigit(*line))
-                line++;
-            f.wp = ft_atoi(line);
-            if (!(f.tab2 = (char **)malloc(sizeof(char *) * f.hp)))
-                return (-3);
-            continue ;
-        }
-        if (++j < f.hp)
-        {
-            if (!(f.tab2[j] = (char *)malloc(sizeof(char) * ft_strlen(line))))
-                return (-4);
-            f.tab2[j] = ft_strncpy(f.tab2[j], line, f.wp);
-            continue ;
-        }
-        if (j >= f.hp)
-            break ;
+        test(f, line);
+        free(line);
     }
-    filler(&f);
+}
+int             main(void)
+{
+    t_struct    f;
+    f.p = 0;
+    f.h = 0;
+    f.w = 0;
+    f.h_p = 0;
+    f.w_p = 0;
+    reading(&f);
     return (0);
 }
