@@ -17,7 +17,7 @@ static void		check2(t_struct *f, int **tab)
 	{
 		if (f->tab2[f->i][f->j] == '*')
 		{
-			if (f->y2 - 4 >= f->c || f->x2 - 1 >= f->l
+			if (f->y2 - 4 >= f->w || f->x2 - 1 >= f->h
 					|| tab[f->x2 - 1][f->y2 - 4] == -1)
 			{
 				f->tmp2 = -1;
@@ -67,10 +67,10 @@ static void		init(t_struct *f)
 int			check_pieces(t_struct *f, int **tab)
 {
 	init(f);
-	while (f->x1 < f->l + 1)
+	while (f->x1 < f->h + 1)
 	{
 		f->y1 = 4;
-		while (f->y1 < f->c + 4)
+		while (f->y1 < f->w + 4)
 		{
 			f->i = 0;
 			f->x2 = f->x1;
