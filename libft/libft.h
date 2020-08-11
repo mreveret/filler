@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machoffa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mreveret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 14:52:57 by machoffa          #+#    #+#             */
-/*   Updated: 2019/09/24 16:43:06 by mreveret         ###   ########.fr       */
+/*   Created: 2019/04/02 14:52:57 by mreveret          #+#    #+#             */
+/*   Updated: 2019/11/25 20:24:27 by mreveret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-# include "get_next_line.h"
+# define BUFF_SIZE 1
+# define C '\n'
 
 typedef struct		s_list
 {
@@ -25,6 +26,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					get_next_line(const int fd, char **line);
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
@@ -46,7 +48,6 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strnstr(const char *haystack, const char *needle,
 		size_t len);
-int					get_next_line(const int fd, char **line);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isupper(int c);

@@ -5,26 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreveret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/20 22:31:35 by mreveret          #+#    #+#             */
-/*   Updated: 2019/09/24 16:14:58 by mreveret         ###   ########.fr       */
+/*   Created: 2019/05/16 15:36:59 by mreveret          #+#    #+#             */
+/*   Updated: 2019/11/25 20:24:18 by mreveret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 #include <limits.h>
 
-static int			read_return(int fd, char **line, char **tab, int ret)
+static int		read_return(int fd, char **line, char **tab, int ret)
 {
-	char		*tmp;
-	int			i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = NULL;
 	if (ret == 0 && (tab[fd] == NULL || tab[fd][0] == '\0'))
 		return (0);
-	while (tab[fd] && tab[fd][i] && tab[fd][i] != '\n')
+	while (tab[fd] && tab[fd][i] && tab[fd][i] != C)
 		i++;
-	if (tab[fd] && tab[fd][i] == '\n')
+	if (tab[fd] && tab[fd][i] == C)
 	{
 		*line = ft_strsub(tab[fd], 0, i);
 		tmp = tab[fd];
@@ -41,7 +41,7 @@ static int			read_return(int fd, char **line, char **tab, int ret)
 	return (1);
 }
 
-int					get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static char		*tab[OPEN_MAX];
 	char			buff[BUFF_SIZE + 1];

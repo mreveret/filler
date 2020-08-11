@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreveret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 17:41:43 by mreveret          #+#    #+#             */
-/*   Updated: 2019/10/23 20:36:23 by mreveret         ###   ########.fr       */
+/*   Created: 2019/11/25 19:10:08 by mreveret          #+#    #+#             */
+/*   Updated: 2019/11/25 20:44:33 by mreveret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ typedef struct	s_struct
 {
 	int			a;
 	int			p;
-	char			m;
-	char			**tab1;
+	char		m;
+	char		**tab1;
 	int			h;
-	int			p;
+	int			w;
 	int			h_p;
 	int			w_p;
 	int			h_f;
 	int			w_f;
 	int			x;
 	int			y;
-	char			**tab2;
+	char		**tab2;
 	int			f;
 	int			f2;
 	int			x1;

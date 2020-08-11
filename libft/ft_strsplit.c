@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machoffa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mreveret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 15:54:10 by machoffa          #+#    #+#             */
-/*   Updated: 2019/10/16 17:59:51 by mreveret         ###   ########.fr       */
+/*   Created: 2019/04/08 15:54:10 by mreveret          #+#    #+#             */
+/*   Updated: 2019/11/25 20:23:47 by mreveret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,24 @@ char			**ft_strsplit(char const *s, char c)
 	int		j;
 	int		k;
 	char	**tab;
-	char	*str;
 
 	i = 0;
-	str = ft_strtrimc(s, c);
-	if ((!(str) || !(c)))
+	s = ft_strtrimc(s, c);
+	if ((!(s) || !(c)))
 		return (NULL);
-	j = count_word(str, c);
+	j = count_word(s, c);
 	if (!(tab = (char **)ft_memalloc(sizeof(char *) * (j + 1))))
 		return (NULL);
-	j = -1;
-	while (++j < count_word(str, c))
+	j = 0;
+	while (j < count_word(s, c))
 	{
-		k = count_letter(str, i, c);
+		k = count_letter(s, i, c);
 		if (!(tab[j] = (char *)ft_memalloc(sizeof(char) * (k + 1))))
 			return (NULL);
-		tab[j] = ft_strncpy(tab[j], str + i, k);
-		i = start_word(str, i, c);
+		tab[j] = ft_strncpy(tab[j], s + i, k);
+		i = start_word(s, i, c);
+		j++;
 	}
-	free(str);
 	tab[j] = 0;
 	return (tab);
 }

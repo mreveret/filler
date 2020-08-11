@@ -5,24 +5,24 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mreveret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/21 14:18:33 by mreveret          #+#    #+#              #
-#    Updated: 2019/10/23 19:41:22 by mreveret         ###   ########.fr        #
+#    Created: 2019/11/25 19:22:00 by mreveret          #+#    #+#              #
+#    Updated: 2019/11/25 19:23:39 by mreveret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = mreveret_filler
+NAME = mreveret.filler
 
 CFLAGS = -Wall -Wextra -Werror -I.
 
 DIR = ./
 
-PATH_SRC = ./
+PATH_SRC = ./srcs/
 
-SRCS = $(PATH_SRC)filler.c \
-	  $(PATH_SRC)main.c \
-	  $(PATH_SRC)tabopti.c \
-	  $(PATH_SRC)check_piece.c \
-	  $(PATH_SRC)int_map.c \
+SRCS =	$(PATH_SRC)filler.c \
+		$(PATH_SRC)tabopti.c \
+		$(PATH_SRC)map.c \
+		$(PATH_SRC)check_pieces.c \
+		$(PATH_SRC)main.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -38,12 +38,12 @@ $(NAME): $(OBJS)
 	gcc -o $@ -c $< $(CFLAGS)
 
 clean:
-	rm -f $(OBJS)
+	rm -f srcs/*.o
 	rm -f libft/*.o
-	rm -f libft/libft.a
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f libft/libft.a
 
 re: fclean all
 
